@@ -1,33 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import logo from './logo.svg'
-import addIdea from './actions'
+import IdeaActions from './actions'
 import Ideas from './Ideas'
 import './App.css'
 
 class App extends Component {
   constructor() {
     super()
+    this.actions = new IdeaActions()
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(e) {
-    e.preventDefault()
-    const ideaContent = this.refs.idea.value
-    this.props.dispatch(addIdea(ideaContent))
+  handleClick() {
+    const ideaTitle = this.refs.ideaTitle.value
+    const ideaBody  = this.refs.ideaBody.value
+    this.props.dispatch(this.actions.addIdea(ideaTitle, ideaBody))
   }
 
   render() {
     return (
       <div className="App">
-        <input type="text" ref="idea" className="idea" />
+        <input type="text" ref="ideaTitle" className="idea" />
+        <input type="text" ref="ideaBody" className="idea" />
         <input 
           type="submit" 
           ref="submit-idea" 
           onClick={this.handleClick}
         /> 
-        {console.log("TRYING TO RENDAAA", this.props.ideas)}
-        <Ideas ideas={this.props.ideas} />
+        <Ideas 
+          ideas={this.props.ideas} 
+          dispatch={this.props.dispatch} 
+        />
       </div>
     )
   }
