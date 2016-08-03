@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import logo from './logo.svg'
 import addIdea from './actions'
+import Ideas from './Ideas'
 import './App.css'
 
 class App extends Component {
@@ -13,7 +14,6 @@ class App extends Component {
   handleClick(e) {
     e.preventDefault()
     const ideaContent = this.refs.idea.value
-    console.log("IN ONCLICK: " + this.props.ideas)
     this.props.dispatch(addIdea(ideaContent))
   }
 
@@ -26,6 +26,8 @@ class App extends Component {
           ref="submit-idea" 
           onClick={this.handleClick}
         /> 
+        {console.log("TRYING TO RENDAAA", this.props.ideas)}
+        <Ideas ideas={this.props.ideas} />
       </div>
     )
   }

@@ -1,9 +1,8 @@
-const ideasChanger = (state, action) => {
-  console.log(state)
+const ideasChanger = (state = [], action) => {
   switch(action.type) {
-    case 'ADD_IDEA':
-    console.log("IN ADD_IDEA", action.idea)
-      return {...state, ideas: action.idea}
+    case 'ADD_IDEA': 
+      const newIdeas = state.ideas.concat([action.idea])
+      return {...state, ideas: newIdeas}
     default:
       return {...state, ideas: []}
   }
